@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/menuHome"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="@string/home"/>
+    <item
+        android:id="@+id/menuAboutUs"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="@string/about_us"/>
+    <item
+        android:id="@+id/menuProfile"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/profile"/>
+    <item
+        android:id="@+id/menuCategory"
+        android:icon="@drawable/ic_baseline_category_24"
+        android:title="@string/category"/>
+    <item
+        android:id="@+id/menuBrands"
+        android:icon="@drawable/ic_baseline_group_work_24"
+        android:title="@string/brands"/>
+    <item
+        android:id="@+id/menuOffers"
+        android:icon="@drawable/ic_baseline_local_offer_24"
+        android:title="@string/offers"/>
+    <item
+        android:id="@+id/menuNewProducts"
+        android:icon="@drawable/ic_baseline_new_releases_24"
+        android:title="@string/new_products"/>
+    <item
+        android:id="@+id/menuMyOrders"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/my_orders"/>
+    <item
+        android:id="@+id/menuMyCarts"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="@string/my_carts"/>
+
+
+</menu>

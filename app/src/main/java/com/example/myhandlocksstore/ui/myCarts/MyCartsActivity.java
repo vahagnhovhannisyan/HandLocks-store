@@ -88,7 +88,7 @@ public class MyCartsActivity extends AppCompatActivity {
         cartAdapter = new MyCartAdapter(getApplicationContext(), cartModelList);
         recyclerView.setAdapter(cartAdapter);
 
-        db.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        db.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("AddToCart").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 if(task.isSuccessful()){
@@ -235,6 +235,7 @@ public class MyCartsActivity extends AppCompatActivity {
 
                 headerName.setText(userModel.getName());
                 headerEmail.setText(userModel.getEmail());
+                if(userModel.getProfileImg() != null)
                 Glide.with(MyCartsActivity.this).load(userModel.getProfileImg()).into(headerImage);
             }
 

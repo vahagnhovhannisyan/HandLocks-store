@@ -201,6 +201,7 @@ public class CategoryActivity extends AppCompatActivity {
 
                 headerName.setText(userModel.getName());
                 headerEmail.setText(userModel.getEmail());
+                if(userModel.getProfileImg() != null)
                 Glide.with(CategoryActivity.this).load(userModel.getProfileImg()).into(headerImage);
             }
 

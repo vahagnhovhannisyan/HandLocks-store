@@ -40,7 +40,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
         Glide.with(context).load(popularModelList.get(position).getImg_url()).into(holder.popImg);
         holder.name.setText(popularModelList.get(position).getName());
         holder.description.setText(popularModelList.get(position).getDescription());
-        holder.rating.setText(popularModelList.get(position).getRating());
+        holder.quality.setText(popularModelList.get(position).getQuality());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,7 +63,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView popImg;
-        TextView name, description, rating;
+        TextView name, description, quality;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -71,7 +71,7 @@ public class PopularAdapters extends RecyclerView.Adapter<PopularAdapters.ViewHo
             popImg = itemView.findViewById(R.id.popImage);
             name = itemView.findViewById(R.id.popName);
             description = itemView.findViewById(R.id.popDes);
-            rating = itemView.findViewById(R.id.popRat);
+            quality = itemView.findViewById(R.id.popQuality);
         }
     }
 }

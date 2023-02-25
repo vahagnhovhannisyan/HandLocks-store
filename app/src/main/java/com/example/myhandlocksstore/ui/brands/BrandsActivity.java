@@ -202,6 +202,7 @@ public class BrandsActivity extends AppCompatActivity {
 
                 headerName.setText(userModel.getName());
                 headerEmail.setText(userModel.getEmail());
+                if(userModel.getProfileImg() != null)
                 Glide.with(BrandsActivity.this).load(userModel.getProfileImg()).into(headerImage);
             }
 

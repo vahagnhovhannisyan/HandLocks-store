@@ -310,6 +310,7 @@ public class HomeActivity extends AppCompatActivity {
 
                 headerName.setText(userModel.getName());
                 headerEmail.setText(userModel.getEmail());
+                if(userModel.getProfileImg() != null)
                 Glide.with(HomeActivity.this).load(userModel.getProfileImg()).into(headerImage);
             }
 

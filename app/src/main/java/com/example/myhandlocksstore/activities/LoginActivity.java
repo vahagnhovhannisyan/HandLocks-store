@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myhandlocksstore.R;
+import com.example.myhandlocksstore.ui.home.HomeActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -85,6 +86,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(task.isSuccessful()){
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(LoginActivity.this,"Դուք հաջողությամբ մուտք եք գործել", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        progressBar.setVisibility(View.VISIBLE);
+                        Toast.makeText(LoginActivity.this,"Խնդրում ենք սպասել, դուք արդեն մուտք եք գործել", Toast.LENGTH_SHORT).show();
+                        finish();
+
 
                 }
                 else {

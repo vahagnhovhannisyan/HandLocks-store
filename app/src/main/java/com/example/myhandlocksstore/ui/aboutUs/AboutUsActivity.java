@@ -143,6 +143,7 @@ public class AboutUsActivity extends AppCompatActivity {
 
                 headerName.setText(userModel.getName());
                 headerEmail.setText(userModel.getEmail());
+                if(userModel.getProfileImg() != null)
                 Glide.with(AboutUsActivity.this).load(userModel.getProfileImg()).into(headerImage);
             }
 

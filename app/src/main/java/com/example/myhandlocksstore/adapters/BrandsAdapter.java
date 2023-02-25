@@ -53,7 +53,7 @@ public class BrandsAdapter extends RecyclerView.Adapter<BrandsAdapter.ViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewAllActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("brand ", list.get(a).getBrand());
+                intent.putExtra("brand", list.get(a).getBrand());
                 context.startActivity(intent);
             }
         });

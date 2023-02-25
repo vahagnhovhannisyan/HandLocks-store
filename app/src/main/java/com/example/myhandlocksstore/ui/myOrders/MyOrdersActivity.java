@@ -144,6 +144,7 @@ public class MyOrdersActivity extends AppCompatActivity {
 
                 headerName.setText(userModel.getName());
                 headerEmail.setText(userModel.getEmail());
+                if(userModel.getProfileImg() != null)
                 Glide.with(MyOrdersActivity.this).load(userModel.getProfileImg()).into(headerImage);
             }
 

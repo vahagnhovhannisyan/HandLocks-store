@@ -3,7 +3,7 @@ package com.example.myhandlocksstore.models;
 public class PopularModel {
     String name;
     String description;
-    String rating;
+    String quality;
     String type;
     String brand;
     String img_url;
@@ -12,10 +12,10 @@ public class PopularModel {
 
     }
 
-    public PopularModel(String name, String description, String rating, String type, String brand, String img_url) {
+    public PopularModel(String name, String description, String quality, String type, String brand, String img_url) {
         this.name = name;
         this.description = description;
-        this.rating = rating;
+        this.quality = quality;
         this.type = type;
         this.brand = brand;
         this.img_url = img_url;
@@ -45,12 +45,12 @@ public class PopularModel {
         this.description = description;
     }
 
-    public String getRating() {
-        return rating;
+    public String getQuality() {
+        return quality;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
+    public void setQuality(String quality) {
+        this.quality = quality;
     }
 
     public String getType() {

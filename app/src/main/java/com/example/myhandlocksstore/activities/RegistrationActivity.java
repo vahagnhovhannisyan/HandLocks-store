@@ -103,6 +103,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
 
                     Toast.makeText(RegistrationActivity.this,"Դուք հաջողությամբ գրանցվել եք", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegistrationActivity.this, LoginActivity.class);
+                    startActivity(intent);
+
                 }
                 else {
                     progressBar.setVisibility(View.GONE);

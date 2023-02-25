@@ -60,7 +60,7 @@ public class PlacedOrderActivity extends AppCompatActivity {
                 cartMap.put("totalQuantity", model.getTotalQuantity());
                 cartMap.put("totalPrice", model.getTotalPrice());
 
-                firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("MyOrder").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                firestore.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("MyOrder").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         Toast.makeText(PlacedOrderActivity.this, "Ձեր Գնումը Կատարված Է", Toast.LENGTH_SHORT).show();

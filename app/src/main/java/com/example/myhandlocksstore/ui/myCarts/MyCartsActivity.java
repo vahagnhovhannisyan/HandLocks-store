@@ -2,6 +2,7 @@ package com.example.myhandlocksstore.ui.myCarts;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,17 +46,21 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyCartsActivity extends AppCompatActivity {
     ImageView imageMenu;
+    ImageView imageMenu0;
     TextView textTitle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FirebaseDatabase database;
 
     Button buyNow;
+    ConstraintLayout constraint1, constraint2;
 
     FirebaseFirestore db;
     FirebaseAuth auth;
@@ -71,6 +76,9 @@ public class MyCartsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_my_carts);
 
         buyNow = findViewById(R.id.buy_now);
+
+        constraint1 = findViewById(R.id.constraint1);
+        constraint2 = findViewById(R.id.constraint2);
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
 
@@ -81,8 +89,6 @@ public class MyCartsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         overTotalAmount = findViewById(R.id.textViewTotalAmount);
-
-
 
         cartModelList = new ArrayList<>();
         cartAdapter = new MyCartAdapter(getApplicationContext(), cartModelList);
@@ -95,7 +101,6 @@ public class MyCartsActivity extends AppCompatActivity {
                     for(DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
 
                         String documentId = documentSnapshot.getId();
-
                         MyCartModel cartModel = documentSnapshot.toObject(MyCartModel.class);
                         cartModel.setDocumentId(documentId);
                         cartModelList.add(cartModel);
@@ -132,10 +137,22 @@ public class MyCartsActivity extends AppCompatActivity {
             totalAmount += myCartModel.getTotalPrice();
         }
         overTotalAmount.setText("Ընդհանուր Գումար։ "+ totalAmount + "֏");
+        if(totalAmount == 0){
+
+
+            constraint2.setVisibility(View.GONE);
+            constraint1.setVisibility(View.VISIBLE);
+
+        }
+        else{
+            constraint1.setVisibility(View.GONE);
+            constraint2.setVisibility(View.VISIBLE);
+        }
 
 
 
         imageMenu = findViewById(R.id.imageMenu);
+        imageMenu0 = findViewById(R.id.imageMenu0);
         textTitle = findViewById(R.id.textTitle);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -143,6 +160,13 @@ public class MyCartsActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         imageMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+        imageMenu0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

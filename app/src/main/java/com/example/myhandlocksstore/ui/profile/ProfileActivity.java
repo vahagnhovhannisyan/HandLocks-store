@@ -61,7 +61,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -283,12 +285,24 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
+        String saveCurrentDate, saveCurrentTime;
+        Calendar calForDate = Calendar.getInstance();
+
+        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd, yyyy");
+        saveCurrentDate = currentDate.format(calForDate.getTime());
+
+        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+        saveCurrentTime = currentTime.format(calForDate.getTime());
+
         final HashMap<String,Object> cartMap = new HashMap<>();
 
                 cartMap.put("userNumber", userNumber);
                 cartMap.put("userAddress", userAddress);
+                cartMap.put("currentDate", saveCurrentDate);
+                cartMap.put("currentTime", saveCurrentTime);
 
-        firestore.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("UserNumber").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+
+        firestore.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("UserNumberAndAddress").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 progressBar.setVisibility(View.GONE);
@@ -324,6 +338,7 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             });
         }
+
 
 
 

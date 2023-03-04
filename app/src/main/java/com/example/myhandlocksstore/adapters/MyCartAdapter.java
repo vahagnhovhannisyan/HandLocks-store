@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myhandlocksstore.R;
 import com.example.myhandlocksstore.activities.DetailedActivity;
 import com.example.myhandlocksstore.models.MyCartModel;
+import com.example.myhandlocksstore.ui.myCarts.MyCartsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,13 +60,14 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.ViewHolder
             @Override
             public void onClick(View v) {
 
-                firestore.collection("CurrentUser").document(auth.getCurrentUser().getUid()).collection("AddToCart").document(cartModelList.get(a).getDocumentId())
+                firestore.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("AddToCart").document(cartModelList.get(a).getDocumentId())
                         .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
 
                                 if(task.isSuccessful()){
                                     cartModelList.remove(cartModelList.get(a));
+
                                     notifyDataSetChanged();
                                     Toast.makeText(context, "Ապրանքը Ջնջված Է", Toast.LENGTH_SHORT).show();
                                 }

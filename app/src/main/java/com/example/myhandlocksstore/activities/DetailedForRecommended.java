@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
-import com.example.myhandlocksstore.models.ViewAllModel;
+import com.example.myhandlocksstore.models.RecommendedModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-public class DetailedActivity extends AppCompatActivity {
+public class DetailedForRecommended extends AppCompatActivity {
 
     TextView quantity;
     int totalQuantity = 1;
@@ -41,7 +40,8 @@ public class DetailedActivity extends AppCompatActivity {
     FirebaseAuth auth;
 
 
-    ViewAllModel viewAllModel = null;
+    RecommendedModel recommendedModel = null;
+
 
 
     @Override
@@ -64,8 +64,8 @@ public class DetailedActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         final Object object = getIntent().getSerializableExtra("detail");
-        if(object instanceof ViewAllModel){
-            viewAllModel = (ViewAllModel) object;
+        if(object instanceof RecommendedModel){
+            recommendedModel = (RecommendedModel) object;
 
         }
 
@@ -78,13 +78,13 @@ public class DetailedActivity extends AppCompatActivity {
         brand = findViewById(R.id.detailed_brand);
         description = findViewById(R.id.detailed_des);
 
-        if(viewAllModel != null){
-            Glide.with(getApplicationContext()).load(viewAllModel.getImg_url()).into(detailedImg);
-            brand.setText(viewAllModel.getBrand());
-            description.setText(viewAllModel.getDescription());
-            price.setText("Արժեք։ " + viewAllModel.getPrice() + "֏");
+        if(recommendedModel != null){
+            Glide.with(getApplicationContext()).load(recommendedModel.getImg_url()).into(detailedImg);
+            brand.setText(recommendedModel.getBrand());
+            description.setText(recommendedModel.getDescription());
+            price.setText("Արժեք։ " + recommendedModel.getNewPrice() + "֏");
 
-            totalPrice = viewAllModel.getPrice() * totalQuantity;
+            totalPrice = recommendedModel.getNewPrice() * totalQuantity;
         }
         addToCart = findViewById(R.id.add_to_cart);
 
@@ -102,7 +102,7 @@ public class DetailedActivity extends AppCompatActivity {
                 if(totalQuantity < 10){
                     totalQuantity++;
                     quantity.setText(String.valueOf(totalQuantity));
-                    totalPrice = viewAllModel.getPrice() * totalQuantity;
+                    totalPrice = recommendedModel.getNewPrice() * totalQuantity;
                 }
 
             }
@@ -114,7 +114,7 @@ public class DetailedActivity extends AppCompatActivity {
                 if(totalQuantity > 1){
                     totalQuantity--;
                     quantity.setText(String.valueOf(totalQuantity));
-                    totalPrice = viewAllModel.getPrice() * totalQuantity;
+                    totalPrice = recommendedModel.getNewPrice() * totalQuantity;
                 }
             }
         });
@@ -132,7 +132,7 @@ public class DetailedActivity extends AppCompatActivity {
 
         final HashMap<String,Object> cartMap = new HashMap<>();
 
-         cartMap.put("productName", viewAllModel.getName());
+        cartMap.put("productName", recommendedModel.getName());
         cartMap.put("productPrice", price.getText().toString());
         cartMap.put("currentDate", saveCurrentDate);
         cartMap.put("currentTime", saveCurrentTime);
@@ -142,7 +142,7 @@ public class DetailedActivity extends AppCompatActivity {
         firestore.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("AddToCart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
-                Toast.makeText(DetailedActivity.this, "Ավելացվել Է Զամբյուղում", Toast.LENGTH_SHORT).show();
+                Toast.makeText(DetailedForRecommended.this, "Ավելացվել Է Զամբյուղում", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

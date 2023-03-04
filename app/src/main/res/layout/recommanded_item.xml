@@ -26,6 +26,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Product Name"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:singleLine="true"
             android:textColor="@color/black"
             android:textSize="19sp"
             android:textStyle="bold"
@@ -35,20 +38,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/rec_dec"
             android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
+            android:maxLines="2"
+            android:singleLine="false"
             android:text="Description"
             android:textColor="@color/black"
             />
         <TextView
             android:layout_width="170dp"
             android:layout_height="wrap_content"
-            android:id="@+id/rec_rat"
             android:ellipsize="end"
             android:maxLines="1"
             android:singleLine="true"
-            android:text="Rating"
-            android:textColor="@color/black"
+            android:text="Զեղջված"
+            android:textColor="#158A19"
             />
 
     </LinearLayout>

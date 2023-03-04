@@ -2,7 +2,7 @@ package com.example.myhandlocksstore.models;
 
 import java.io.Serializable;
 
-public class RecommendedModel implements Serializable {
+public class OffersModel implements Serializable {
     String name;
     String description;
     int oldPrice;
@@ -10,10 +10,10 @@ public class RecommendedModel implements Serializable {
     String img_url;
     String brand;
 
-    public RecommendedModel() {
+    public OffersModel() {
     }
 
-    public RecommendedModel(String name, String description, int oldPrice, int newPrice, String img_url,String brand) {
+    public OffersModel(String name, String description, int oldPrice, int newPrice, String img_url,String brand) {
         this.name = name;
         this.description = description;
         this.oldPrice = oldPrice;

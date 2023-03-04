@@ -29,6 +29,12 @@
             android:name=".activities.DetailedActivity"
             android:exported="false" />
         <activity
+            android:name=".activities.DetailedForOffersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.DetailedForRecommended"
+            android:exported="false" />
+        <activity
             android:name=".activities.ViewAllActivity"
             android:exported="false" />
         <activity

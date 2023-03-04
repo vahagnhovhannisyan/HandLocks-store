@@ -2,6 +2,7 @@ package com.example.myhandlocksstore.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
-import com.example.myhandlocksstore.activities.DetailedForRecommended;
-import com.example.myhandlocksstore.models.RecommendedModel;
+import com.example.myhandlocksstore.activities.DetailedActivity;
+import com.example.myhandlocksstore.activities.DetailedForOffersActivity;
+import com.example.myhandlocksstore.activities.ViewAllActivity;
+import com.example.myhandlocksstore.models.NavCategoryModel;
+import com.example.myhandlocksstore.models.OffersModel;
 
 import java.util.List;
 
-public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.ViewHolder> {
+public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder> {
     Context context;
-    List<RecommendedModel> list;
+    List<OffersModel> list;
 
-    public RecommendedAdapter(Context context, List<RecommendedModel> list) {
+    public OffersAdapter(Context context, List<OffersModel> list) {
         this.context = context;
         this.list = list;
     }
@@ -30,7 +34,7 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recommanded_item, parent, false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.offers_item, parent, false));
     }
 
     @Override
@@ -39,11 +43,14 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
         Glide.with(context).load(list.get(position).getImg_url()).into(holder.imageView);
         holder.name.setText(list.get(position).getName());
         holder.description.setText(list.get(position).getDescription());
+        holder.oldPrice.setText(list.get(position).getOldPrice() + "֏");
+        holder.newPrice.setText(list.get(position).getNewPrice() + "֏");
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DetailedForRecommended.class);
+                Intent intent = new Intent(context, DetailedForOffersActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("detail", list.get(a));
                 context.startActivity(intent);
@@ -62,14 +69,16 @@ public class RecommendedAdapter extends RecyclerView.Adapter<RecommendedAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView name, description;
+        TextView name, description, oldPrice, newPrice;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.rec_image);
-            name = itemView.findViewById(R.id.rec_name);
-            description = itemView.findViewById(R.id.rec_dec);
+            imageView = itemView.findViewById(R.id.offer_img);
+            name = itemView.findViewById(R.id.offer_name);
+            description = itemView.findViewById(R.id.offer_des);
+            oldPrice = itemView.findViewById(R.id.offer_old_price);
+            newPrice = itemView.findViewById(R.id.offer_new_price);
         }
     }
 }

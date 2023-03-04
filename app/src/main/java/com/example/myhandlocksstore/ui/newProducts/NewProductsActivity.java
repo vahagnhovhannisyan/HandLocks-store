@@ -4,16 +4,24 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.myhandlocksstore.adapters.NewProductsAdapter;
+import com.example.myhandlocksstore.adapters.ViewAllAdapters;
 import com.example.myhandlocksstore.models.UserModel;
+import com.example.myhandlocksstore.models.ViewAllModel;
 import com.example.myhandlocksstore.ui.aboutUs.AboutUsActivity;
 import com.example.myhandlocksstore.ui.brands.BrandsActivity;
 import com.example.myhandlocksstore.ui.category.CategoryActivity;
@@ -23,21 +31,38 @@ import com.example.myhandlocksstore.ui.myCarts.MyCartsActivity;
 import com.example.myhandlocksstore.ui.myOrders.MyOrdersActivity;
 import com.example.myhandlocksstore.ui.offers.OffersActivity;
 import com.example.myhandlocksstore.ui.profile.ProfileActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class NewProductsActivity extends AppCompatActivity {
+    ScrollView scrollView;
+    ProgressBar progressBar;
+
     ImageView imageMenu;
     TextView textTitle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+
+    RecyclerView newProductsRec;
+    FirebaseFirestore db;
     FirebaseDatabase database;
+
+    List<ViewAllModel> viewAllModelList;
+    NewProductsAdapter newProductsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +75,45 @@ public class NewProductsActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
 
         database = FirebaseDatabase.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        scrollView = findViewById(R.id.scrollView3);
+        progressBar = findViewById(R.id.progressbar);
+
+        progressBar.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
+
+        newProductsRec = findViewById(R.id.recyclerview);
+
+
+        newProductsRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+        viewAllModelList = new ArrayList<>();
+        newProductsAdapter = new NewProductsAdapter(getApplicationContext(),viewAllModelList);
+        newProductsRec.setAdapter(newProductsAdapter);
+
+        db.collection("NewProducts")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                ViewAllModel viewAllModel = document.toObject(ViewAllModel.class);
+                                viewAllModelList.add(viewAllModel);
+                                newProductsAdapter.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Սխալ։" + task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
 
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override

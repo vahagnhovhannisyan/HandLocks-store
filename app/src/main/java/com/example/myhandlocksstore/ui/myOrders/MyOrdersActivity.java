@@ -2,17 +2,25 @@ package com.example.myhandlocksstore.ui.myOrders;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.myhandlocksstore.adapters.MyCartAdapter;
+import com.example.myhandlocksstore.adapters.MyOrdersAdapter;
+import com.example.myhandlocksstore.models.MyCartModel;
+import com.example.myhandlocksstore.models.MyOrdersModel;
 import com.example.myhandlocksstore.models.UserModel;
 import com.example.myhandlocksstore.ui.aboutUs.AboutUsActivity;
 import com.example.myhandlocksstore.ui.brands.BrandsActivity;
@@ -23,12 +31,20 @@ import com.example.myhandlocksstore.ui.myCarts.MyCartsActivity;
 import com.example.myhandlocksstore.ui.newProducts.NewProductsActivity;
 import com.example.myhandlocksstore.ui.offers.OffersActivity;
 import com.example.myhandlocksstore.ui.profile.ProfileActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -39,12 +55,84 @@ public class MyOrdersActivity extends AppCompatActivity {
     NavigationView navigationView;
     FirebaseDatabase database;
 
+    ConstraintLayout constraint1, constraint2;
+
+    FirebaseFirestore db;
+    FirebaseAuth auth;
+    TextView overTotalMoney;
+    RecyclerView recyclerView;
+    MyOrdersAdapter myOrdersAdapter;
+    List<MyOrdersModel> myOrdersModelList;
+    ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_orders);
 
-        imageMenu = findViewById(R.id.imageMenu);
+        constraint1 = findViewById(R.id.constraint1);
+        constraint2 = findViewById(R.id.constraint2);
+        progressBar = findViewById(R.id.progressbar);
+        progressBar.setVisibility(View.VISIBLE);
+
+        overTotalMoney = findViewById(R.id.textViewTotalMoney);
+
+        db = FirebaseFirestore.getInstance();
+        auth = FirebaseAuth.getInstance();
+
+
+        recyclerView = findViewById(R.id.recyclerview);
+        recyclerView.setVisibility(View.GONE);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
+        myOrdersModelList = new ArrayList<>();
+        myOrdersAdapter = new MyOrdersAdapter(getApplicationContext(), myOrdersModelList);
+        recyclerView.setAdapter(myOrdersAdapter);
+
+        db.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("MyOrder").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (DocumentSnapshot documentSnapshot : task.getResult().getDocuments()) {
+
+                        String documentId = documentSnapshot.getId();
+                        MyOrdersModel myOrdersModel = documentSnapshot.toObject(MyOrdersModel.class);
+                        myOrdersModel.setDocumentId(documentId);
+                        myOrdersModelList.add(myOrdersModel);
+                        myOrdersAdapter.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+
+                    calculateTotalMoney(myOrdersModelList);
+                }
+
+
+            }
+        });
+    }
+
+        private void calculateTotalMoney(List<MyOrdersModel> myOrdersModelList) {
+
+            double totalMoney = 0.0;
+            for(MyOrdersModel myOrdersModel : myOrdersModelList){
+                totalMoney += myOrdersModel.getTotalPrice();
+            }
+            overTotalMoney.setText("Ընդհանուր Առևտուր։ "+ totalMoney + "֏");
+            if(totalMoney == 0){
+
+
+                constraint2.setVisibility(View.GONE);
+                constraint1.setVisibility(View.VISIBLE);
+
+            }
+            else{
+                constraint1.setVisibility(View.GONE);
+                constraint2.setVisibility(View.VISIBLE);
+            }
+
+
+            imageMenu = findViewById(R.id.imageMenu);
         textTitle = findViewById(R.id.textTitle);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);

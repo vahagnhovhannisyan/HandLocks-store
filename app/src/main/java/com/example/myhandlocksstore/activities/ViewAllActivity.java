@@ -6,13 +6,19 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.myhandlocksstore.R;
 import com.example.myhandlocksstore.adapters.ViewAllAdapters;
+import com.example.myhandlocksstore.models.MyCartModel;
 import com.example.myhandlocksstore.models.ViewAllModel;
+import com.example.myhandlocksstore.ui.aboutUs.AboutUsActivity;
+import com.example.myhandlocksstore.ui.myCarts.MyCartsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -30,7 +36,9 @@ public class ViewAllActivity extends AppCompatActivity {
     List<ViewAllModel> viewAllModelList;
     Toolbar toolbar;
     ProgressBar progressBar;
+    ImageView imageCart;
 
+    List<MyCartModel> cartModelList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,16 @@ public class ViewAllActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.VISIBLE);
+
+        imageCart = findViewById(R.id.imageCart);
+
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(ViewAllActivity.this, MyCartsActivity.class));
+            }
+        });
 
         firestore = FirebaseFirestore.getInstance();
         String brand = getIntent().getStringExtra("brand");

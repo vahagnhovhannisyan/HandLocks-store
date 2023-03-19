@@ -20,6 +20,8 @@
             android:orientation="horizontal"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
@@ -29,17 +31,35 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_baseline_menu_24"
                 app:tint="@color/white" />
+
             <TextView
                 android:id="@+id/textTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:text="@string/about_us"
-                android:textSize="18dp"
                 android:textColor="@color/white"
-                android:textStyle="bold"/>
+                android:textSize="18dp"
+                android:textStyle="bold" />
+
+
 
         </LinearLayout>
+
+
+        <ImageView
+
+
+            android:id="@+id/imageCart"
+            android:layout_marginRight="10dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_baseline_shopping_cart_24"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutToolBar"
+            app:layout_constraintEnd_toEndOf="@+id/layoutToolBar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -87,7 +107,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:src="@drawable/handlocks_logo"
+                android:src="@drawable/handlocks"
                 app:civ_border_color="#FF000000"
                 app:civ_border_width="2dp"
                 app:layout_constraintEnd_toEndOf="parent"

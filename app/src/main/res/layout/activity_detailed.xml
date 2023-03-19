@@ -16,6 +16,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="Ընտրած Ապրանք"/>
+    <ImageView
+
+
+        android:id="@+id/imageCart"
+        android:layout_marginRight="10dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_baseline_shopping_cart_24"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+
 
     <ImageView
         android:id="@+id/detailed_img"
@@ -98,7 +113,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/relativeLayout"
         android:layout_marginLeft="6dp"
-        android:background="@drawable/ic_baseline_add_circle_outline_24"/>
+        android:background="@drawable/ic_baseline_add_circle_24"/>
 
     <TextView
         android:id="@+id/quantity"
@@ -118,7 +133,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="4dp"
-        android:background="@drawable/ic_baseline_remove_circle_outline_24"
+        android:background="@drawable/ic_baseline_remove_circle_24"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/quantity"
         app:layout_constraintTop_toTopOf="@+id/relativeLayout" />

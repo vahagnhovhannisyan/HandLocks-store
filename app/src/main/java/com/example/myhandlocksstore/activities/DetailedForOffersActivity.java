@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
 import com.example.myhandlocksstore.models.OffersModel;
 import com.example.myhandlocksstore.models.ViewAllModel;
+import com.example.myhandlocksstore.ui.aboutUs.AboutUsActivity;
+import com.example.myhandlocksstore.ui.myCarts.MyCartsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +36,7 @@ public class DetailedForOffersActivity extends AppCompatActivity {
     int totalPrice = 0;
 
     ImageView detailedImg;
+    ImageView imageCart;
     TextView price, brand, description;
     Button addToCart;
     ImageView addItem, removeItem;
@@ -70,6 +74,16 @@ public class DetailedForOffersActivity extends AppCompatActivity {
             offersModel = (OffersModel) object;
 
         }
+
+        imageCart = findViewById(R.id.imageCart);
+
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(DetailedForOffersActivity.this, MyCartsActivity.class));
+            }
+        });
 
         quantity = findViewById(R.id.quantity);
         detailedImg = findViewById(R.id.detailed_img);

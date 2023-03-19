@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.adapters.NewProductsAdapter;
 import com.example.myhandlocksstore.adapters.ViewAllAdapters;
+import com.example.myhandlocksstore.models.PopularModel;
 import com.example.myhandlocksstore.models.UserModel;
 import com.example.myhandlocksstore.models.ViewAllModel;
 import com.example.myhandlocksstore.ui.aboutUs.AboutUsActivity;
@@ -52,13 +53,14 @@ public class NewProductsActivity extends AppCompatActivity {
     ScrollView scrollView;
     ProgressBar progressBar;
 
+    ImageView imageCart;
     ImageView imageMenu;
     TextView textTitle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
 
     RecyclerView newProductsRec;
-    FirebaseFirestore db;
+    FirebaseFirestore firestore;
     FirebaseDatabase database;
 
     List<ViewAllModel> viewAllModelList;
@@ -69,13 +71,14 @@ public class NewProductsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_products);
 
+        imageCart = findViewById(R.id.imageCart);
         imageMenu = findViewById(R.id.imageMenu);
         textTitle = findViewById(R.id.textTitle);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
 
         database = FirebaseDatabase.getInstance();
-        db = FirebaseFirestore.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         scrollView = findViewById(R.id.scrollView3);
         progressBar = findViewById(R.id.progressbar);
@@ -83,15 +86,17 @@ public class NewProductsActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
 
-        newProductsRec = findViewById(R.id.recyclerview);
+        newProductsRec = findViewById(R.id.newProductsRec);
 
 
-        newProductsRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+
+        newProductsRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.VERTICAL,false));
         viewAllModelList = new ArrayList<>();
-        newProductsAdapter = new NewProductsAdapter(getApplicationContext(),viewAllModelList);
+        newProductsAdapter = new NewProductsAdapter(getApplicationContext(), viewAllModelList);
         newProductsRec.setAdapter(newProductsAdapter);
 
-        db.collection("NewProducts")
+
+        firestore.collection("NewProducts")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -114,6 +119,13 @@ public class NewProductsActivity extends AppCompatActivity {
                     }
                 });
 
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(NewProductsActivity.this, MyCartsActivity.class));
+            }
+        });
 
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override

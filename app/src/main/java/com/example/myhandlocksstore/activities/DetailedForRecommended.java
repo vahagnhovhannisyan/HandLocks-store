@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
 import com.example.myhandlocksstore.models.RecommendedModel;
+import com.example.myhandlocksstore.ui.aboutUs.AboutUsActivity;
+import com.example.myhandlocksstore.ui.myCarts.MyCartsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +34,7 @@ public class DetailedForRecommended extends AppCompatActivity {
     int totalPrice = 0;
 
     ImageView detailedImg;
+    ImageView imageCart;
     TextView price, brand, description;
     Button addToCart;
     ImageView addItem, removeItem;
@@ -68,6 +72,16 @@ public class DetailedForRecommended extends AppCompatActivity {
             recommendedModel = (RecommendedModel) object;
 
         }
+
+        imageCart = findViewById(R.id.imageCart);
+
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(DetailedForRecommended.this, MyCartsActivity.class));
+            }
+        });
 
         quantity = findViewById(R.id.quantity);
         detailedImg = findViewById(R.id.detailed_img);

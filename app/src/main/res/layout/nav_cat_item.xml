@@ -17,16 +17,17 @@
             android:id="@+id/nav_cat_img"
             android:layout_width="150dp"
             android:backgroundTint="#FFFFFF"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             app:riv_corner_radius="5dp"
             android:scaleType="center"
-            android:layout_margin="5dp"
+            android:layout_margin="10dp"
             android:background="@drawable/login_image"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
             <TextView
@@ -57,6 +58,7 @@
                 android:layout_gravity="end"
                 android:src="@drawable/ic_baseline_navigate_next_24"
                 android:layout_marginTop="14dp"
+                android:layout_marginBottom="0dp"
                 android:layout_marginRight="5dp"/>
 
         </LinearLayout>

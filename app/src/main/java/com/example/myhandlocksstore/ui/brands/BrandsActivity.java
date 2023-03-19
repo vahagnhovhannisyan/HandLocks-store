@@ -56,6 +56,7 @@ public class BrandsActivity extends AppCompatActivity {
     BrandsAdapter brandsAdapter;
 
     ImageView imageMenu;
+    ImageView imageCart;
     TextView textTitle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -102,12 +103,22 @@ public class BrandsActivity extends AppCompatActivity {
                     }
                 });
 
+        imageCart = findViewById(R.id.imageCart);
         imageMenu = findViewById(R.id.imageMenu);
         textTitle = findViewById(R.id.textTitle);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
 
         database = FirebaseDatabase.getInstance();
+
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(BrandsActivity.this, MyCartsActivity.class));
+            }
+        });
+
 
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override

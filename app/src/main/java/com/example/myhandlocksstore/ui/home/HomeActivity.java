@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
 import com.example.myhandlocksstore.adapters.HomeAdapter;
-import com.example.myhandlocksstore.adapters.OffersAdapter;
+import com.example.myhandlocksstore.adapters.OffersBrnAdapter;
 import com.example.myhandlocksstore.adapters.PopularAdapters;
 import com.example.myhandlocksstore.adapters.RecommendedAdapter;
 import com.example.myhandlocksstore.adapters.ViewAllAdapters;
@@ -65,6 +65,7 @@ public class HomeActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     DrawerLayout drawerLayout;
+    ImageView imageCart;
     ImageView imageMenu;
     NavigationView navigationView;
     TextView textTitle;
@@ -73,6 +74,7 @@ public class HomeActivity extends AppCompatActivity {
     RecyclerView popularRec, homeCatRec, recommendedRec;
     FirebaseFirestore db;
     FirebaseDatabase database;
+    FirebaseAuth auth;
 
     List<PopularModel> popularModelList;
     PopularAdapters popularAdapters;
@@ -94,6 +96,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         drawerLayout = findViewById(R.id.drawerLayout);
+        imageCart = findViewById(R.id.imageCart);
         imageMenu = findViewById(R.id.imageMenu);
         navigationView = findViewById(R.id.navigationView);
         textTitle = findViewById(R.id.textTitle);
@@ -103,6 +106,7 @@ public class HomeActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         database = FirebaseDatabase.getInstance();
+        auth = FirebaseAuth.getInstance();
 
         popularRec = findViewById(R.id.popRec);
         homeCatRec = findViewById(R.id.exploreRec);
@@ -218,6 +222,14 @@ public class HomeActivity extends AppCompatActivity {
         });
 
 
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(HomeActivity.this, MyCartsActivity.class));
+            }
+        });
+
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,7 +260,6 @@ public class HomeActivity extends AppCompatActivity {
                     case
                             R.id.menuProfile:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, ProfileActivity.class));
 
                         break;
@@ -305,22 +316,25 @@ public class HomeActivity extends AppCompatActivity {
         TextView headerEmail = headerView.findViewById(R.id.nav_header_email);
         CircleImageView headerImage = headerView.findViewById(R.id.nav_header_img);
 
-        database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserModel userModel = snapshot.getValue(UserModel.class);
 
-                headerName.setText(userModel.getName());
-                headerEmail.setText(userModel.getEmail());
-                if(userModel.getProfileImg() != null)
-                Glide.with(HomeActivity.this).load(userModel.getProfileImg()).into(headerImage);
-            }
+            database.getReference().child("Users").child(FirebaseAuth.getInstance().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    UserModel userModel = snapshot.getValue(UserModel.class);
 
-            }
-        });
+                        headerName.setText(userModel.getName());
+                        headerEmail.setText(userModel.getEmail());
+                    if (userModel.getProfileImg() != null)
+                        Glide.with(HomeActivity.this).load(userModel.getProfileImg()).into(headerImage);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
 
         recyclerViewSearch = findViewById(R.id.search_rec);
         searchBox = findViewById(R.id.search_box);

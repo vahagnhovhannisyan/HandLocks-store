@@ -16,8 +16,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.myhandlocksstore.activities.DetailedActivity;
 import com.example.myhandlocksstore.models.UserModel;
 import com.example.myhandlocksstore.ui.aboutUs.AboutUsActivity;
 import com.example.myhandlocksstore.ui.brands.BrandsActivity;
@@ -123,6 +125,27 @@ public class MyCartsActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), PlacedOrderActivity.class);
                 intent.putExtra("itemList", (Serializable) cartModelList);
                 startActivity(intent);
+                calculateTotalAmount(cartModelList);
+                for(int a = 0; a < cartModelList.size(); a++){
+
+                    db.collection("CurrentUser").document(auth.getCurrentUser().getEmail()).collection("AddToCart").document(cartModelList.get(a).getDocumentId())
+                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful()) {
+                                        for(int a = 0; a < cartModelList.size(); a++){
+                                        cartModelList.remove(cartModelList.get(a));
+                                        }
+
+                                         cartAdapter.notifyDataSetChanged();
+                                    } else {
+                                        Toast.makeText(getApplicationContext(), "Սխալ" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                            });
+                }
 
             }
         });

@@ -7,9 +7,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/handlocks_logo"
+        android:icon="@drawable/handlocks"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/handlocks_logo"
+        android:roundIcon="@drawable/handlocks"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyHandLocksStore"
         tools:targetApi="31">

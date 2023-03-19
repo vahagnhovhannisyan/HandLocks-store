@@ -19,7 +19,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
-import com.example.myhandlocksstore.adapters.OffersAdapter;
+import com.example.myhandlocksstore.adapters.OffersBrnAdapter;
+import com.example.myhandlocksstore.adapters.OffersCxnAdapter;
+import com.example.myhandlocksstore.adapters.OffersKoxAdapter;
+import com.example.myhandlocksstore.adapters.OffersMijAdapter;
+import com.example.myhandlocksstore.adapters.OffersMxlAdapter;
+import com.example.myhandlocksstore.adapters.OffersPakAdapter;
+import com.example.myhandlocksstore.adapters.OffersPakMexAdapter;
 import com.example.myhandlocksstore.adapters.PopularAdapters;
 import com.example.myhandlocksstore.models.OffersModel;
 import com.example.myhandlocksstore.models.PopularModel;
@@ -55,21 +61,41 @@ public class OffersActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     ImageView imageMenu;
+    ImageView imageCart;
     TextView textTitle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FirebaseDatabase database;
 
-    RecyclerView offersRec;
+    RecyclerView brnRec, pakRec, koxRec, mxlRec, cxnRec, mijRec, pakMexRec;
     FirebaseFirestore db;
 
     List<OffersModel> offersModelList;
-    OffersAdapter offersAdapter;
+    OffersBrnAdapter offersBrnAdapter;
+
+    List<OffersModel> offersPakModelList;
+    OffersPakAdapter offersPakAdapter;
+
+    List<OffersModel> offersKoxModelList;
+    OffersKoxAdapter offersKoxAdapter;
+
+    List<OffersModel> offersMxlModelList;
+    OffersMxlAdapter offersMxlAdapter;
+
+    List<OffersModel> offersCxnModelList;
+    OffersCxnAdapter offersCxnAdapter;
+
+    List<OffersModel> offersMijModelList;
+    OffersMijAdapter offersMijAdapter;
+
+    List<OffersModel> offersPakMexModelList;
+    OffersPakMexAdapter offersPakMexAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offers);
+        imageCart = findViewById(R.id.imageCart);
         imageMenu = findViewById(R.id.imageMenu);
         textTitle = findViewById(R.id.textTitle);
         navigationView = findViewById(R.id.navigationView);
@@ -84,15 +110,22 @@ public class OffersActivity extends AppCompatActivity {
         progressBar.setVisibility(View.VISIBLE);
         scrollView.setVisibility(View.GONE);
 
-        offersRec = findViewById(R.id.off_rec);
+        brnRec = findViewById(R.id.brnRec);
+        pakRec = findViewById(R.id.pakRec);
+        koxRec = findViewById(R.id.koxRec);
+        mxlRec = findViewById(R.id.mxlRec);
+        cxnRec = findViewById(R.id.cxnRec);
+        mijRec = findViewById(R.id.mijRec);
+        pakMexRec = findViewById(R.id.pakMexRec);
 
 
-        offersRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+
+        brnRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
         offersModelList = new ArrayList<>();
-        offersAdapter = new OffersAdapter(getApplicationContext(),offersModelList);
-        offersRec.setAdapter(offersAdapter);
+        offersBrnAdapter = new OffersBrnAdapter(getApplicationContext(),offersModelList);
+        brnRec.setAdapter(offersBrnAdapter);
 
-        db.collection("Offers")
+        db.collection("OffersBrn")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -101,7 +134,7 @@ public class OffersActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 OffersModel offersModel = document.toObject(OffersModel.class);
                                 offersModelList.add(offersModel);
-                                offersAdapter.notifyDataSetChanged();
+                                offersBrnAdapter.notifyDataSetChanged();
 
                                 progressBar.setVisibility(View.GONE);
                                 scrollView.setVisibility(View.VISIBLE);
@@ -114,6 +147,182 @@ public class OffersActivity extends AppCompatActivity {
                         }
                     }
                 });
+
+        pakRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+        offersPakModelList = new ArrayList<>();
+        offersPakAdapter = new OffersPakAdapter(getApplicationContext(),offersPakModelList);
+        pakRec.setAdapter(offersPakAdapter);
+
+        db.collection("OffersPak")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                OffersModel offersModel = document.toObject(OffersModel.class);
+                                offersPakModelList.add(offersModel);
+                                offersPakAdapter.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Սխալ։" + task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+        koxRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+        offersKoxModelList = new ArrayList<>();
+        offersKoxAdapter = new OffersKoxAdapter(getApplicationContext(),offersKoxModelList);
+        koxRec.setAdapter(offersKoxAdapter);
+
+        db.collection("OffersKox")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                OffersModel offersModel = document.toObject(OffersModel.class);
+                                offersKoxModelList.add(offersModel);
+                                offersKoxAdapter.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Սխալ։" + task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+        mxlRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+        offersMxlModelList = new ArrayList<>();
+        offersMxlAdapter = new OffersMxlAdapter(getApplicationContext(),offersMxlModelList);
+        mxlRec.setAdapter(offersMxlAdapter);
+
+        db.collection("OffersMxl")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                OffersModel offersModel = document.toObject(OffersModel.class);
+                                offersMxlModelList.add(offersModel);
+                                offersMxlAdapter.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Սխալ։" + task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+        cxnRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+        offersCxnModelList = new ArrayList<>();
+        offersCxnAdapter = new OffersCxnAdapter(getApplicationContext(),offersCxnModelList);
+        cxnRec.setAdapter(offersCxnAdapter);
+
+        db.collection("OffersCxn")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                OffersModel offersModel = document.toObject(OffersModel.class);
+                                offersCxnModelList.add(offersModel);
+                                offersCxnAdapter.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Սխալ։" + task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+        mijRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+        offersMijModelList = new ArrayList<>();
+        offersMijAdapter = new OffersMijAdapter(getApplicationContext(),offersMijModelList);
+        mijRec.setAdapter(offersMijAdapter);
+
+        db.collection("OffersMij")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                OffersModel offersModel = document.toObject(OffersModel.class);
+                                offersMijModelList.add(offersModel);
+                                offersMijAdapter.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Սխալ։" + task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+        pakMexRec.setLayoutManager(new LinearLayoutManager(getApplicationContext(), RecyclerView.HORIZONTAL,false));
+        offersPakMexModelList = new ArrayList<>();
+        offersPakMexAdapter = new OffersPakMexAdapter(getApplicationContext(),offersPakMexModelList);
+        pakMexRec.setAdapter(offersPakMexAdapter);
+
+        db.collection("OffersPak")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task .getResult()) {
+                                OffersModel offersModel = document.toObject(OffersModel.class);
+                                offersPakMexModelList.add(offersModel);
+                                offersPakMexAdapter.notifyDataSetChanged();
+
+                                progressBar.setVisibility(View.GONE);
+                                scrollView.setVisibility(View.VISIBLE);
+
+                            }
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Սխալ։" + task.getException(), Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
+
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(OffersActivity.this, MyCartsActivity.class));
+            }
+        });
 
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override

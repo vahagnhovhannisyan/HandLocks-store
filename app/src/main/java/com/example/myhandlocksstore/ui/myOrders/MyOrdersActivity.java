@@ -49,6 +49,7 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyOrdersActivity extends AppCompatActivity {
+    ImageView imageCart;
     ImageView imageMenu;
     TextView textTitle;
     DrawerLayout drawerLayout;
@@ -132,12 +133,21 @@ public class MyOrdersActivity extends AppCompatActivity {
             }
 
 
-            imageMenu = findViewById(R.id.imageMenu);
+        imageCart = findViewById(R.id.imageCart);
+        imageMenu = findViewById(R.id.imageMenu);
         textTitle = findViewById(R.id.textTitle);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
 
         database = FirebaseDatabase.getInstance();
+
+            imageCart.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                    startActivity(new Intent(MyOrdersActivity.this, MyCartsActivity.class));
+                }
+            });
 
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override

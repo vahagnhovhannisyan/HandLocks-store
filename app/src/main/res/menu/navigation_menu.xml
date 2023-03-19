@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <item
         android:id="@+id/menuHome"
         android:icon="@drawable/ic_baseline_home_24"
@@ -38,6 +37,5 @@
         android:id="@+id/menuMyCarts"
         android:icon="@drawable/ic_baseline_shopping_cart_24"
         android:title="@string/my_carts"/>
-
 
 </menu>

@@ -85,6 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     ImageView imageMenu;
+    ImageView imageCart;
     TextView textTitle;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -109,10 +110,19 @@ public class ProfileActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressbar);
         progressBar.setVisibility(View.GONE);
 
+        imageCart = findViewById(R.id.imageCart);
         imageMenu = findViewById(R.id.imageMenu);
         textTitle = findViewById(R.id.textTitle);
         navigationView = findViewById(R.id.navigationView);
         drawerLayout = findViewById(R.id.drawerLayout);
+
+        imageCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(ProfileActivity.this, MyCartsActivity.class));
+            }
+        });
 
         imageMenu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -2,7 +2,6 @@ package com.example.myhandlocksstore.adapters;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
-import com.example.myhandlocksstore.activities.DetailedActivity;
 import com.example.myhandlocksstore.activities.DetailedForOffersActivity;
-import com.example.myhandlocksstore.activities.ViewAllActivity;
-import com.example.myhandlocksstore.models.NavCategoryModel;
 import com.example.myhandlocksstore.models.OffersModel;
 
 import java.util.List;
 
-public class OffersAdapter extends RecyclerView.Adapter<OffersAdapter.ViewHolder> {
+public class OffersPakMexAdapter extends RecyclerView.Adapter<OffersPakMexAdapter.ViewHolder> {
     Context context;
     List<OffersModel> list;
 
-    public OffersAdapter(Context context, List<OffersModel> list) {
+    public OffersPakMexAdapter(Context context, List<OffersModel> list) {
         this.context = context;
         this.list = list;
     }

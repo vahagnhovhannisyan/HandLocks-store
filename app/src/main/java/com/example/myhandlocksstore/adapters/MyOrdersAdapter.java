@@ -52,6 +52,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
         holder.time.setText(myOrdersModelList.get(position).getCurrentTime());
         holder.quantity.setText(myOrdersModelList.get(position).getTotalQuantity());
         holder.totalPrice.setText(String.valueOf(myOrdersModelList.get(position).getTotalPrice()));
+        holder.deliveryType.setText(myOrdersModelList.get(position).getDeliveryType());
 
 
     }
@@ -62,8 +63,8 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, price, date, time, quantity, totalPrice;
-        ImageView deleteItem;
+        TextView name, price, date, time, quantity, totalPrice, deliveryType;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.product_name);
@@ -72,6 +73,7 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.ViewHo
             time = itemView.findViewById(R.id.current_time);
             quantity = itemView.findViewById(R.id.total_quantity);
             totalPrice = itemView.findViewById(R.id.total_price);
+            deliveryType = itemView.findViewById(R.id.delivery_type);
 
 
 

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.myhandlocksstore.R;
+import com.example.myhandlocksstore.activities.LoginActivity;
+import com.example.myhandlocksstore.activities.MainActivity;
 import com.example.myhandlocksstore.models.UserModel;
 import com.example.myhandlocksstore.ui.brands.BrandsActivity;
 import com.example.myhandlocksstore.ui.category.CategoryActivity;
@@ -67,6 +71,7 @@ public class AboutUsActivity extends AppCompatActivity {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
 
         navigationView.setItemIconTintList(null);
 
@@ -162,5 +167,28 @@ public class AboutUsActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void instagram(View view) {
+        Uri uri = Uri.parse("https://www.instagram.com/handlocks/");
+        Intent instagram = new Intent(Intent.ACTION_VIEW, uri);
+        instagram.setPackage("com.instagram.android");
+        try {
+            startActivity(instagram);
+        }
+        catch (ActivityNotFoundException e){
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/handlocks/")));
+        }
+    }
+
+    public void facebook(View view) {
+        Uri uri = Uri.parse("https://www.facebook.com/people/HandLocks/100054345528687/");
+        Intent facebook = new Intent(Intent.ACTION_VIEW, uri);
+        facebook.setPackage("com.facebook.android");
+        try {
+            startActivity(facebook);
+        }
+        catch (ActivityNotFoundException e){
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/people/HandLocks/100054345528687/")));
+        }
     }
 }

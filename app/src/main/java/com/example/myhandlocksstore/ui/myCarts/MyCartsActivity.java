@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +56,8 @@ import java.util.TimerTask;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyCartsActivity extends AppCompatActivity {
+    RadioGroup radioGroup;
+    RadioButton radioButton;
     ImageView imageMenu;
     ImageView imageMenu0;
     TextView textTitle;
@@ -76,6 +80,7 @@ public class MyCartsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_carts);
+        radioGroup = findViewById(R.id.radioGroup);
 
         buyNow = findViewById(R.id.buy_now);
 
@@ -122,7 +127,10 @@ public class MyCartsActivity extends AppCompatActivity {
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int selectId = radioGroup.getCheckedRadioButtonId();
+                radioButton = findViewById(selectId);
                 Intent intent = new Intent(getApplicationContext(), PlacedOrderActivity.class);
+                intent.putExtra("deliveryType", radioButton.getText().toString());
                 intent.putExtra("itemList", (Serializable) cartModelList);
                 startActivity(intent);
                 calculateTotalAmount(cartModelList);
@@ -149,30 +157,6 @@ public class MyCartsActivity extends AppCompatActivity {
 
             }
         });
-
-
-    }
-
-    private void calculateTotalAmount(List<MyCartModel> cartModelList) {
-
-        double totalAmount = 0.0;
-        for(MyCartModel myCartModel : cartModelList){
-            totalAmount += myCartModel.getTotalPrice();
-        }
-        overTotalAmount.setText("Ընդհանուր Գումար։ "+ totalAmount + "֏");
-        if(totalAmount == 0){
-
-
-            constraint2.setVisibility(View.GONE);
-            constraint1.setVisibility(View.VISIBLE);
-
-        }
-        else{
-            constraint1.setVisibility(View.GONE);
-            constraint2.setVisibility(View.VISIBLE);
-        }
-
-
 
         imageMenu = findViewById(R.id.imageMenu);
         imageMenu0 = findViewById(R.id.imageMenu0);
@@ -202,65 +186,56 @@ public class MyCartsActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case
-                            R.id.menuHome:
+                switch (item.getItemId()) {
+                    case R.id.menuHome:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, HomeActivity.class));
 
                         break;
-                    case
-                            R.id.menuAboutUs:
+                    case R.id.menuAboutUs:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, AboutUsActivity.class));
                         break;
 
-                    case
-                            R.id.menuProfile:
+                    case R.id.menuProfile:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, ProfileActivity.class));
 
                         break;
-                    case
-                            R.id.menuCategory:
+                    case R.id.menuCategory:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, CategoryActivity.class));
 
                         break;
-                    case
-                            R.id.menuBrands:
+                    case R.id.menuBrands:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, BrandsActivity.class));
 
                         break;
-                    case
-                            R.id.menuOffers:
+                    case R.id.menuOffers:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, OffersActivity.class));
 
                         break;
-                    case
-                            R.id.menuNewProducts:
+                    case R.id.menuNewProducts:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, NewProductsActivity.class));
 
                         break;
-                    case
-                            R.id.menuMyOrders:
+                    case R.id.menuMyOrders:
                         drawerLayout.closeDrawer(GravityCompat.START);
                         finish();
                         startActivity(new Intent(MyCartsActivity.this, MyOrdersActivity.class));
 
                         break;
-                    case
-                            R.id.menuMyCarts:
+                    case R.id.menuMyCarts:
                         drawerLayout.closeDrawer(GravityCompat.START);
 
                         break;
@@ -282,8 +257,8 @@ public class MyCartsActivity extends AppCompatActivity {
 
                 headerName.setText(userModel.getName());
                 headerEmail.setText(userModel.getEmail());
-                if(userModel.getProfileImg() != null)
-                Glide.with(MyCartsActivity.this).load(userModel.getProfileImg()).into(headerImage);
+                if (userModel.getProfileImg() != null)
+                    Glide.with(MyCartsActivity.this).load(userModel.getProfileImg()).into(headerImage);
             }
 
             @Override
@@ -291,6 +266,46 @@ public class MyCartsActivity extends AppCompatActivity {
 
             }
         });
+
+
+        Thread thread = new Thread(){
+            @Override
+            public void run(){
+                while (!isInterrupted()){
+                    try {
+                        Thread.sleep(1000);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                calculateTotalAmount(cartModelList);
+                            }
+                        });
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
+        thread.start();
     }
 
+    private void calculateTotalAmount(List<MyCartModel> cartModelList) {
+
+        double totalAmount = 0.0;
+        for (MyCartModel myCartModel : cartModelList) {
+            totalAmount += myCartModel.getTotalPrice();
+        }
+        overTotalAmount.setText("Ընդհանուր Գումար։ " + totalAmount + "֏");
+        if (totalAmount == 0) {
+
+
+            constraint2.setVisibility(View.GONE);
+            constraint1.setVisibility(View.VISIBLE);
+
+        } else {
+            constraint1.setVisibility(View.GONE);
+            constraint2.setVisibility(View.VISIBLE);
+        }
+
+    }
 }

@@ -12,14 +12,14 @@
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/drawable/ic_baseline_login_24.xml" value="0.2555" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/drawable/ic_baseline_remove_circle_outline_24.xml" value="0.121" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/drawable/logo.xml" value="0.2545" />
-        <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_about_us.xml" value="0.4351851851851852" />
+        <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_about_us.xml" value="0.536" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_brands.xml" value="0.264" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_category.xml" value="0.2" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_detailed.xml" value="0.4" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_home.xml" value="0.4" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_login.xml" value="0.22852512155591573" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_main.xml" value="0.4" />
-        <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_my_carts.xml" value="0.176" />
+        <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_my_carts.xml" value="0.536" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_my_orders.xml" value="0.4" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_nav_category.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/activity_new_products.xml" value="0.536" />
@@ -38,7 +38,7 @@
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/home_cat_items.xml" value="1.2" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/layout_navigation_header.xml" value="0.20521590423257802" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/my_cart_item.xml" value="0.20436083796494228" />
-        <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/my_orders_item.xml" value="0.20436083796494228" />
+        <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/my_orders_item.xml" value="0.6" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/nav_cat_item.xml" value="0.2" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/nav_header_main.xml" value="0.1" />
         <entry key="..\:/Users/Acer/Dilijan/MyHandLocksStore2/app/src/main/res/layout/new_product_item.xml" value="0.264" />

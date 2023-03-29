@@ -20,6 +20,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 public class RegistrationActivity extends AppCompatActivity {
     Button signUp;
@@ -28,6 +32,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseDatabase database;
+    FirebaseFirestore firestore;
 
     ProgressBar progressBar;
 
@@ -38,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
@@ -147,6 +153,16 @@ public class RegistrationActivity extends AppCompatActivity {
                     database.getReference().child("Users").child(id).setValue(userModel);
                     progressBar.setVisibility(View.GONE);
 
+                    final HashMap<String,Object> cartMap0 = new HashMap<>();
+
+                    cartMap0.put("name", userModel.getName());
+                    cartMap0.put("email", userModel.getEmail());
+
+                    firestore.collection("Users").add(cartMap0).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentReference> task) {
+                        }
+                    });
 
 
                 }

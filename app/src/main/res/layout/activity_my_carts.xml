@@ -113,6 +113,13 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"/>
 
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Switch" />
+
         </LinearLayout>
 
 
@@ -132,10 +139,12 @@
             app:layout_constraintTop_toBottomOf="@+id/layoutToolBar" />
 
         <ScrollView
+            android:id="@+id/scrollView4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/buy_now"
+            app:layout_constraintBottom_toTopOf="@+id/radioGroup"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewTotalAmount">
 
@@ -154,7 +163,7 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/buy_now"
-            android:layout_width="350dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/button_background"
@@ -163,7 +172,37 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <RadioGroup
+
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/buy_now"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <RadioButton
+                android:id="@+id/radio_no_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Ինքնափոխադրում"
+                android:textColor="@color/black" />
+
+            <RadioButton
+                android:id="@+id/radio_delivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="Առաքում"
+                android:textColor="@color/black" />
+
+
+        </RadioGroup>
 
         <ProgressBar
             android:id="@+id/progressbar"

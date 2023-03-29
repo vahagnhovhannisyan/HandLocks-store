@@ -108,23 +108,7 @@
 
         </LinearLayout>
     </LinearLayout>
-            <TextView
-                android:id="@+id/asGuest"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="50dp"
-                android:text="Մուտք գործել առանց գրանցվելու"
-                android:textColor="@color/purple_700"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.07"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-                app:layout_constraintVertical_bias="0" />
+
     <TextView
         android:id="@+id/thankYou"
         android:layout_width="0dp"
@@ -147,14 +131,14 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:scaleX="0.5"
                 android:scaleY="0.5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/asGuest"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

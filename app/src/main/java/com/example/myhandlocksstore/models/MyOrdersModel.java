@@ -9,18 +9,28 @@ public class MyOrdersModel implements Serializable {
     String currentTime;
     String totalQuantity;
     int totalPrice;
+    String deliveryType;
     String documentId;
 
     public MyOrdersModel() {
     }
 
-    public MyOrdersModel(String productName, String productPrice, String currentDate, String currentTime, String totalQuantity, int totalPrice) {
+    public MyOrdersModel(String productName, String productPrice, String currentDate, String currentTime, String totalQuantity, int totalPrice, String deliveryType) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.currentDate = currentDate;
         this.currentTime = currentTime;
         this.totalQuantity = totalQuantity;
         this.totalPrice = totalPrice;
+        this.deliveryType = deliveryType;
+    }
+
+    public String getDeliveryType() {
+        return deliveryType;
+    }
+
+    public void setDeliveryType(String deliveryType) {
+        this.deliveryType = deliveryType;
     }
 
     public String getDocumentId() {

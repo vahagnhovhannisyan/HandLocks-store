@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
 
-    TextView asGuest;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,21 +35,12 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
 
-        asGuest = findViewById(R.id.asGuest);
-
         if(auth.getCurrentUser() != null && auth.getCurrentUser().isEmailVerified()){
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
             progressBar.setVisibility(View.VISIBLE);
             Toast.makeText(this,"Խնդրում ենք սպասել, դուք արդեն մուտք եք գործել", Toast.LENGTH_SHORT).show();
             finish();
         }
-
-        asGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-            }
-        });
 
     }
 

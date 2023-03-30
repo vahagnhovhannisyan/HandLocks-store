@@ -197,7 +197,7 @@ public class ViewAllActivity extends AppCompatActivity {
             });
         }
         if (type != null && type.equalsIgnoreCase("կողպեք")){
-            firestore.collection("AllProducts").whereEqualTo("type","կողպոք").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            firestore.collection("AllProducts").whereEqualTo("type","կողպեք").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
@@ -226,6 +226,21 @@ public class ViewAllActivity extends AppCompatActivity {
         }
         if (type != null && type.equalsIgnoreCase("մղլակ")){
             firestore.collection("AllProducts").whereEqualTo("type","մղլակ").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        ViewAllModel viewAllModel = documentSnapshot.toObject(ViewAllModel.class);
+                        viewAllModelList.add(viewAllModel);
+                        viewAllAdapters.notifyDataSetChanged();
+                        progressBar.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+        }
+
+        if (type != null && type.equalsIgnoreCase("փականի մեխանիզմ")){
+            firestore.collection("AllProducts").whereEqualTo("type","փականի մեխանիզմ").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
                     for(DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){

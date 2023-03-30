@@ -253,7 +253,6 @@ public class HomeActivity extends AppCompatActivity {
                     case
                             R.id.menuAboutUs:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, AboutUsActivity.class));
                     break;
 
@@ -266,42 +265,36 @@ public class HomeActivity extends AppCompatActivity {
                     case
                             R.id.menuCategory:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, CategoryActivity.class));
 
                         break;
                     case
                             R.id.menuNewProducts:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, NewProductsActivity.class));
 
                         break;
                     case
                             R.id.menuBrands:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, BrandsActivity.class));
 
                         break;
                     case
                             R.id.menuOffers:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, OffersActivity.class));
 
                         break;
                     case
                             R.id.menuMyOrders:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, MyOrdersActivity.class));
 
                         break;
                     case
                             R.id.menuMyCarts:
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        finish();
                         startActivity(new Intent(HomeActivity.this, MyCartsActivity.class));
 
                         break;
